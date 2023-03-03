@@ -23,7 +23,7 @@ Import the file "rfid.py" into your "main.py" file
 
 Then, import from it the class "RFID".
 
-When using it, if you use the same pins as in the table, there is no need to pass any method to the constructor, otherwise set properly all the arguments to match your connections.
+When using it, if you use the same pins as in the table, there is no need to pass any argument to the constructor, otherwise set properly all the arguments to match your connections.
 
 The class RFID provides few methods: 
 
