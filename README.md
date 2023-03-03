@@ -39,4 +39,4 @@ The class RFID provides few methods:
 
 - ``rewrite(content: str)`` erases the card and writes content, returns True if success otherwise False
 
-An example of the usage can be found in folder ``Pico_examples``, just copy the file ``EraseWriteRead.py`` into your microcontroller and test it with your own reader and cards/tags
+An example of the usage can be found in folder ``Pico_example``, just copy the file ``EraseWriteRead.py`` into your microcontroller and test it with your own reader and cards/tags
