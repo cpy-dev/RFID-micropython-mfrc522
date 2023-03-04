@@ -73,10 +73,10 @@ class RFID:
         self.reader.init()
         status, _ = self.reader.request(self.reader.REQIDL)
 
-        if status != self.reader.OK: return 'a'
+        if status != self.reader.OK: return False
         status, uid = self.reader.SelectTagSN()
     
-        if status != self.reader.OK: return 'b'
+        if status != self.reader.OK: return False
         defaultKey = [255,255,255,255,255,255]
 
         firstSectorKey = [0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5]
@@ -91,7 +91,7 @@ class RFID:
         block3 = access.fillBlock3(keyA=firstSectorKey,keyB=defaultKey)
         
         if self.reader.writeSectorBlock(uid,0,3,block3,keyA=defaultKey) == self.reader.ERR:
-            return 'c'
+            return False
         
         b1 = [0x14,0x01,0x03,0xE1,0x03,0xE1,0x03,0xE1,0x03,0xE1,0x03,0xE1,0x03,0xE1,0x03,0xE1]
         self.reader.writeSectorBlock(uid,0,1,b1,keyB=defaultKey)
@@ -133,7 +133,7 @@ class RFID:
                     ) == self.reader.ERR: return False
             
             if  self.reader.writeSectorBlock(uid, sector, 3, block3, keyA=defaultKey) == self.reader.ERR:
-                return 'd'
+                return False
             
         return True
     
