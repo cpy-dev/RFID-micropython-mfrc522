@@ -378,5 +378,32 @@ class MFRC522:
             print("Authentication error")
             return self.ERR
         return self.OK
+    
+    def getContent(self, uid, keyA=[0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5], keyB=[0xD3, 0xF7, 0xD3, 0xF7, 0xD3, 0xF7]):
+        content = []
+        
+        for absoluteBlock in range(64):
+            line = []
+            
+            if absoluteBlock < 4:
+                status = self.authKeys(uid, absoluteBlock, keyA=keyA)
+            
+            else:
+                status = self.authKeys(uid, absoluteBlock, keyA=keyB)
+
+            if status == self.OK:                    
+                status, block = self.read(absoluteBlock)
+                
+                if status == self.ERR:
+                    return False
+            
+                else:
+                    for value in block:
+                        line.append(value)
+            
+            else: return None
+            content.append(line)
+
+        return content
         
                 
